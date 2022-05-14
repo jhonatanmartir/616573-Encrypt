@@ -62,10 +62,10 @@ namespace AESEncryption
             return plaintext;
         }
 
-        public static string SetEncrypt(string plainText, string key, string iv)
+        public static string SetEncrypt(string plainText, string encryptKey, string secretKey)
         {
-            byte[] aesKey = Convert.FromBase64String(key);
-            byte[] aesIv = Convert.FromBase64String(iv);
+            byte[] aesKey = Convert.FromBase64String(encryptKey);
+            byte[] aesIv = Convert.FromBase64String(secretKey);
             byte[] encrypted;
             // Create a new AesManaged.
             using (AesManaged aes = new AesManaged())
@@ -90,10 +90,10 @@ namespace AESEncryption
             // Return encrypted data    
             return Convert.ToBase64String(encrypted);
         }
-        public static string GetDecrypt(string cipherText, string key, string iv)
+        public static string GetDecrypt(string cipherText, string encryptKey, string secretKey)
         {
-            byte[] aesKey = Convert.FromBase64String(key);
-            byte[] aesIv = Convert.FromBase64String(iv);
+            byte[] aesKey = Convert.FromBase64String(encryptKey);
+            byte[] aesIv = Convert.FromBase64String(secretKey);
             byte[] buffer = Convert.FromBase64String(cipherText);
             string plaintext = null;
             // Create AesManaged    
