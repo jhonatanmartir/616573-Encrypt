@@ -10,10 +10,49 @@ namespace AES.Test
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter text that needs to be encrypted..");
-            string data = Console.ReadLine();
-            EncryptAesManaged(data);
-            Console.ReadLine();
+            string op = Menu();
+            string sop = "";
+            while (op != "3")
+            {
+                switch (op)
+                {
+                    case "1":
+                        Console.WriteLine("Enter text that needs to be encrypted..");
+                        string data = Console.ReadLine();
+                        EncryptAesManaged(data);
+                        Console.Write("\n\nContinue? (y): ");
+                        sop = Console.ReadLine();
+                        break;
+                    case "2":
+                        AESEncryption.AES.PrintNewKeys();
+                        Console.WriteLine("Keys was generated.");
+                        Console.WriteLine("Txt file is located in Desktop");
+                        Console.Write("\n\nContinue? (y): ");
+                        sop = Console.ReadLine();
+                        break;
+                    case "3":
+                    default:
+                        break;
+
+                }
+
+                if(sop != "y")
+                {
+                    op = Menu();
+                }
+            }
+        }
+
+        static string Menu()
+        {
+            Console.Clear();
+            Console.WriteLine("OPTIONS MENU");
+            Console.WriteLine("1 - Test Encryption: ");
+            Console.WriteLine("2 - Generate Keys in TXT: ");
+            Console.WriteLine("3 - Exit");
+            Console.Write("\nEnter option: ");
+            string op = Console.ReadLine();
+            return op;
         }
 
         static void EncryptAesManaged(string raw)
@@ -40,7 +79,7 @@ namespace AES.Test
             {
                 Console.WriteLine(exp.Message);
             }
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }
