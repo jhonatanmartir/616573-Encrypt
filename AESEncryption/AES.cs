@@ -293,5 +293,30 @@ namespace AESEncryption
             
             return R.ToString();
         }
+
+        /**
+         * Save keys in txt file. Desktop path
+         */
+        public static string PrintNewKeys()
+        {
+            string result = "OK";
+            try
+            {
+                string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                //Pass the filepath and filename to the StreamWriter Constructor
+                StreamWriter sw = new StreamWriter(filePath + "\\GeneratedKeysAESEncript.txt");
+                //Write a line of text
+                sw.WriteLine("KEY: " +  GetNewAESKey());
+                sw.WriteLine("SKEY: " + GetNewAESIV());
+                //Close the file
+                sw.Close();
+            }
+            catch (Exception e)
+            {
+                result = e.Message;
+            }
+
+            return result;
+        }
     }
 }
