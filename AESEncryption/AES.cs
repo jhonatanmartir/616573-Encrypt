@@ -318,5 +318,17 @@ namespace AESEncryption
 
             return result;
         }
+
+        public static string GetMD5(string text)
+        {
+            MD5 hash = MD5.Create();
+            byte[] data = hash.ComputeHash(Encoding.UTF8.GetBytes(text));
+            StringBuilder sBuilder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+            return sBuilder.ToString().ToUpper();
+        }
     }
 }

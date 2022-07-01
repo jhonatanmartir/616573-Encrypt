@@ -12,7 +12,7 @@ namespace AES.Test
         {
             string op = Menu();
             string sop = "";
-            while (op != "3")
+            while (op != "4")
             {
                 switch (op)
                 {
@@ -24,13 +24,20 @@ namespace AES.Test
                         sop = Console.ReadLine();
                         break;
                     case "2":
+                        Console.WriteLine("Enter text that needs to be hashed..");
+                        string dataIn = Console.ReadLine();
+                        HashMD5(dataIn);
+                        Console.Write("\n\nContinue? (y): ");
+                        sop = Console.ReadLine();
+                        break;
+                    case "3":
                         AESEncryption.AES.PrintNewKeys();
                         Console.WriteLine("Keys was generated.");
                         Console.WriteLine("Txt file is located in Desktop");
                         Console.Write("\n\nContinue? (y): ");
                         sop = Console.ReadLine();
                         break;
-                    case "3":
+                    case "4":
                     default:
                         break;
 
@@ -48,8 +55,9 @@ namespace AES.Test
             Console.Clear();
             Console.WriteLine("OPTIONS MENU");
             Console.WriteLine("1 - Test Encryption: ");
-            Console.WriteLine("2 - Generate Keys in TXT: ");
-            Console.WriteLine("3 - Exit");
+            Console.WriteLine("2 - Test Hash MD5: ");
+            Console.WriteLine("3 - Generate Keys in TXT: ");
+            Console.WriteLine("4 - Exit");
             Console.Write("\nEnter option: ");
             string op = Console.ReadLine();
             return op;
@@ -80,6 +88,19 @@ namespace AES.Test
                 Console.WriteLine(exp.Message);
             }
             //Console.ReadKey();
+        }
+
+        static void HashMD5(string raw)
+        {
+            try
+            {
+                string encrypted = AESEncryption.AES.GetMD5(raw);
+                Console.WriteLine($"Hash data: {encrypted}");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
