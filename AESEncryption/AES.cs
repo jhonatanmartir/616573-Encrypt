@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NeoSmart.Utils;
+using System;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AESEncryption
 {
@@ -106,7 +104,8 @@ namespace AESEncryption
                         }
                     }
                 }
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return ex.Message;
             }
@@ -146,11 +145,12 @@ namespace AESEncryption
                         }
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return ex.Message;
             }
-            
+
             return plaintext;
         }
 
@@ -188,13 +188,14 @@ namespace AESEncryption
                         }
                     }
                 }
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return ex.Message;
             }
-            
+
             // Return encrypted data    
-            return Convert.ToBase64String(encrypted);
+            return UrlBase64.Encode(encrypted);
         }
 
         /**
@@ -204,7 +205,7 @@ namespace AESEncryption
         {
             byte[] aesKey = Convert.FromBase64String(encryptKey);
             byte[] aesIv = Convert.FromBase64String(secretKey);
-            byte[] buffer = Convert.FromBase64String(cipherText);
+            byte[] buffer = UrlBase64.Decode(cipherText);
             string plaintext = null;
 
             try
@@ -229,11 +230,12 @@ namespace AESEncryption
                         }
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return ex.Message;
             }
-            
+
             return plaintext;
         }
 
@@ -268,11 +270,12 @@ namespace AESEncryption
             {
                 var N = long.Parse(text);
                 do { R += CHARS[(int)(N % 0x3E)]; } while ((N /= 0x3E) != 0);
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return ex.Message;
             }
-            
+
             return R;
         }
 
@@ -286,11 +289,12 @@ namespace AESEncryption
             {
                 int L = text.Length;
                 for (int i = 0; i < L; i++) R += CHARS.IndexOf(text[i]) * (long)(System.Math.Pow(0x3E, i));
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return ex.Message;
             }
-            
+
             return R.ToString();
         }
 
@@ -306,7 +310,7 @@ namespace AESEncryption
                 //Pass the filepath and filename to the StreamWriter Constructor
                 StreamWriter sw = new StreamWriter(filePath + "\\GeneratedKeysAESEncript.txt");
                 //Write a line of text
-                sw.WriteLine("KEY: " +  GetNewAESKey());
+                sw.WriteLine("KEY: " + GetNewAESKey());
                 sw.WriteLine("SKEY: " + GetNewAESIV());
                 //Close the file
                 sw.Close();

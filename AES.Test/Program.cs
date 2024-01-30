@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AES.Test
 {
@@ -24,26 +20,33 @@ namespace AES.Test
                         sop = Console.ReadLine();
                         break;
                     case "2":
+                        Console.WriteLine("Enter text that needs to be encrypted..");
+                        string dataNum = Console.ReadLine();
+                        EncryptAesManagedNum(dataNum);
+                        Console.Write("\n\nContinue? (y): ");
+                        sop = Console.ReadLine();
+                        break;
+                    case "3":
                         Console.WriteLine("Enter text that needs to be hashed..");
                         string dataIn = Console.ReadLine();
                         HashMD5(dataIn);
                         Console.Write("\n\nContinue? (y): ");
                         sop = Console.ReadLine();
                         break;
-                    case "3":
+                    case "4":
                         AESEncryption.AES.PrintNewKeys();
                         Console.WriteLine("Keys was generated.");
                         Console.WriteLine("Txt file is located in Desktop");
                         Console.Write("\n\nContinue? (y): ");
                         sop = Console.ReadLine();
                         break;
-                    case "4":
+                    case "5":
                     default:
                         break;
 
                 }
 
-                if(sop != "y")
+                if (sop != "y")
                 {
                     op = Menu();
                 }
@@ -55,9 +58,10 @@ namespace AES.Test
             Console.Clear();
             Console.WriteLine("OPTIONS MENU");
             Console.WriteLine("1 - Test Encryption: ");
-            Console.WriteLine("2 - Test Hash MD5: ");
-            Console.WriteLine("3 - Generate Keys in TXT: ");
-            Console.WriteLine("4 - Exit");
+            Console.WriteLine("2 - Test Encryption number: ");
+            Console.WriteLine("3 - Test Hash MD5: ");
+            Console.WriteLine("4 - Generate Keys in TXT: ");
+            Console.WriteLine("5 - Exit");
             Console.Write("\nEnter option: ");
             string op = Console.ReadLine();
             return op;
@@ -89,6 +93,32 @@ namespace AES.Test
             }
             //Console.ReadKey();
         }
+        static void EncryptAesManagedNum(string raw)
+        {
+            string key = "pojtZnWBRXGC1Pz8LYoH2Nipvzt4hioqO8jB7vaMbGg=";
+            string iv = "1cIPR5AUcZYkJbn56f8KRA==";
+            try
+            {
+                // Encrypt string    
+                string encrypted = AESEncryption.AES.SetEncryptNumber(raw, key, iv);
+                // Print encrypted string    
+                Console.WriteLine($"Encrypted data: {encrypted}");
+                // Decrypt the bytes to a string.    
+                string decrypted = AESEncryption.AES.GetDecryptNumber(encrypted, key, iv);
+                // Print decrypted string. It should be same as raw data    
+                Console.WriteLine($"Decrypted data: {decrypted}");
+                //string val = "";
+                //val = AESEncryption.AES.GetNewAESKey();
+                //Console.WriteLine($"Key: {val}");
+                //val = AESEncryption.AES.GetNewAESIV();
+                //Console.WriteLine($"IV: {val}");
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine(exp.Message);
+            }
+            //Console.ReadKey();
+        }
 
         static void HashMD5(string raw)
         {
@@ -97,7 +127,7 @@ namespace AES.Test
                 string encrypted = AESEncryption.AES.GetMD5(raw);
                 Console.WriteLine($"Hash data: {encrypted}");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
