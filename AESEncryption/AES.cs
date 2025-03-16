@@ -111,7 +111,7 @@ namespace AESEncryption
             }
 
             // Return encrypted data    
-            return Convert.ToBase64String(encrypted);
+            return UrlBase64.Encode(encrypted);
         }
 
         /**
@@ -121,7 +121,7 @@ namespace AESEncryption
         {
             byte[] aesKey = Convert.FromBase64String(encryptKey);
             byte[] aesIv = Convert.FromBase64String(secretKey);
-            byte[] buffer = Convert.FromBase64String(cipherText);
+            byte[] buffer = UrlBase64.Decode(cipherText);
             string plaintext = null;
 
             try
@@ -333,6 +333,56 @@ namespace AESEncryption
                 sBuilder.Append(data[i].ToString("x2"));
             }
             return sBuilder.ToString().ToUpper();
+        }
+
+        /* News */
+        public static string GenerateKeyPair()
+        {
+            // Generar un nuevo par de claves RSA
+            return "";
+        }
+
+        /**
+         * Save keys RSA in txt file. Desktop path
+         */
+        public static string PrintNewKeysRSA()
+        {
+            string publicKey;
+            string privateKey;
+            string result = "OK";
+
+            //using (RSA rsa = RSA.Create(2048)) // Tamaño de clave de 2048 bits
+            //{
+            //    // Exportar las claves pública y privada
+            //    publicKey = Convert.ToBase64String(rsa.ExportRSAPublicKey());
+            //    privateKey = Convert.ToBase64String(rsa.ExportRSAPrivateKey());
+
+            //    // Cifrado híbrido
+            //    (byte[] mensajeCifrado, byte[] claveSimetricaCifrada) = CifrarHibrido(mensajeOriginal, publicKey);
+            //    Console.WriteLine("Mensaje cifrado (AES + RSA): " + Convert.ToBase64String(mensajeCifrado));
+            //    Console.WriteLine("Clave simétrica cifrada (RSA): " + Convert.ToBase64String(claveSimetricaCifrada));
+
+            //    // Descifrado híbrido
+            //    string mensajeDescifrado = DescifrarHibrido(mensajeCifrado, claveSimetricaCifrada, privateKey);
+            //    Console.WriteLine("Mensaje descifrado: " + mensajeDescifrado);
+            //}
+            //try
+            //{
+            //    string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            //    //Pass the filepath and filename to the StreamWriter Constructor
+            //    StreamWriter sw = new StreamWriter(filePath + "\\GeneratedKeysRSA.txt");
+            //    //Write a line of text
+            //    sw.WriteLine("Public: " + GetNewAESKey());
+            //    sw.WriteLine("Private: " + GetNewAESIV());
+            //    //Close the file
+            //    sw.Close();
+            //}
+            //catch (Exception e)
+            //{
+            //    result = e.Message;
+            //}
+
+            return result;
         }
     }
 }

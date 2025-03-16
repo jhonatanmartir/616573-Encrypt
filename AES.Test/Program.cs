@@ -8,7 +8,7 @@ namespace AES.Test
         {
             string op = Menu();
             string sop = "";
-            while (op != "4")
+            while (op != "7")
             {
                 switch (op)
                 {
@@ -41,6 +41,16 @@ namespace AES.Test
                         sop = Console.ReadLine();
                         break;
                     case "5":
+                        AESEncryption.AES.PrintNewKeys();
+                        Console.WriteLine("Keys hibrid was generated.");
+                        Console.WriteLine("Txt file is located in Desktop");
+                        Console.Write("\n\nContinue? (y): ");
+                        sop = Console.ReadLine();
+                        break;
+                    case "6":
+                        //TODO
+                        break;
+                    case "7":
                     default:
                         break;
 
@@ -61,7 +71,9 @@ namespace AES.Test
             Console.WriteLine("2 - Test Encryption number: ");
             Console.WriteLine("3 - Test Hash MD5: ");
             Console.WriteLine("4 - Generate Keys in TXT: ");
-            Console.WriteLine("5 - Exit");
+            Console.WriteLine("5 - Generate Hibrid keys");
+            Console.WriteLine("6 - Test Hibrid Encryption");
+            Console.WriteLine("7 - Exit");
             Console.Write("\nEnter option: ");
             string op = Console.ReadLine();
             return op;
